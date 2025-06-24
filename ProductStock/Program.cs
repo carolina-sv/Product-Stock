@@ -1,49 +1,62 @@
 ﻿using System;
-using System.Collections.Generic;
+using ProductStock;
 
 class Program
 {
     static void Main()
     {
-        List<string> produtos = new List<string>(); // ✅ Lista para armazenar vários produtos
+        ProductStock.ProductStock estoque = new ProductStock.ProductStock();
 
         while (true)
         {
-            Console.WriteLine("Bem vindo! Escolha uma ação:");
-            Console.WriteLine("\n 1. Cadastrar produto \n 2. Listar produtos \n 3. Sair");
-            string escolherAcao = Console.ReadLine();
+            Console.WriteLine("\n📦 Bem-vindo ao Sistema de Estoque!");
+            Console.WriteLine("Escolha uma ação:");
+            Console.WriteLine("1. Cadastrar produto");
+            Console.WriteLine("2. Listar produtos");
+            Console.WriteLine("3. Sair");
+            Console.Write("Digite o número da ação: ");
 
-            if (escolherAcao == "3")
+            try
             {
-                Console.WriteLine("Deixando o estoque...Programa encerrado ⚠️");
-                break;
-            }
+                string entrada = Console.ReadLine();
 
-            if (escolherAcao == "1")
-            {
-                Console.WriteLine("👉 Qual o nome do produto que deseja cadastrar?");
-                string nomeProduto = Console.ReadLine();
-                produtos.Add(nomeProduto);
-                Console.WriteLine("✅ Produto cadastrado com sucesso!");
-            }
-            else if (escolherAcao == "2")
-            {
-                Console.WriteLine("📋 Produtos cadastrados:");
-                if (produtos.Count == 0)
+                switch (entrada)
                 {
-                    Console.WriteLine("📭 Nenhum produto cadastrado.");
-                }
-                else
-                {
-                    foreach (string p in produtos)
-                    {
-                        Console.WriteLine($"📦 {p}");
-                    }
+                    case "1":
+                        Console.Write("👉 Nome do produto: ");
+                        string nome = Console.ReadLine();
+
+                        Console.Write("💰 Preço do produto (ex: 50.00): ");
+                        string precoStr = Console.ReadLine();
+                        double preco;
+                        if (!double.TryParse(precoStr, out preco))
+                        {
+                            Console.WriteLine("❌ Preço inválido.");
+                            break;
+                        }
+
+                        Console.Write("✅ Produto disponível? (s/n): ");
+                        string disponivel = Console.ReadLine();
+
+                        string resultado = estoque.CadastrarProduto(nome, preco, disponivel);
+                        Console.WriteLine(resultado);
+                        break;
+
+                    case "2":
+                        Console.WriteLine(estoque.ListarProdutos());
+                        break;
+
+                    case "3":
+                        Console.WriteLine("👋 Programa encerrado. Até mais!");
+                        return;
+
+                    default:
+                        throw new Exception("⚠️ Opção inválida. Escolha 1, 2 ou 3.");
                 }
             }
-            else
+            catch (Exception ex)
             {
-                Console.WriteLine("⚠️ Opção inválida!");
+                Console.WriteLine(ex.Message);
             }
         }
     }
