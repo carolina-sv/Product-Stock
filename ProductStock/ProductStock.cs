@@ -4,20 +4,20 @@ namespace ProductStock
 {
     public class Produto
     {
-        public string Nome { get; set; }
+        public string Nome { get; set; } //propriedades autoimplementadas :)
         public double Preco { get; set; }
         public string Disponibilidade { get; set; }
     }
 
     public class ProductStock
     {
-        private List<Produto> produtos = new List<Produto>();
+        private List<Produto> produtos = new List<Produto>(); //encapsulamento, maior controle de dados internos:)
 
         public string CadastrarProduto(string nome, double preco, string disponibilidade)
         {
             if (string.IsNullOrWhiteSpace(nome) || preco < 0 || string.IsNullOrWhiteSpace(disponibilidade))
             {
-                return "⚠️ Dados inválidos. Verifique os campos.";
+                return "⚠️ Dados inválidos.";
             }
 
             produtos.Add(new Produto
@@ -41,7 +41,7 @@ namespace ProductStock
 
             foreach (var produto in produtos)
             {
-                resultado += $"📦 Nome: {produto.Nome} | 💰 Preço: R${produto.Preco:F2} | ✅ Disponível: {produto.Disponibilidade}\n";
+                resultado += $"📦 Nome: {produto.Nome} | 💰 Preço: R${produto.Preco:F2} | ✅ Disponível: {produto.Disponibilidade}";
             }
 
             return resultado;
