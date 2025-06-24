@@ -15,7 +15,7 @@ namespace ProductStock
 
         public string CadastrarProduto(string nome, double preco, string disponibilidade)
         {
-            if (string.IsNullOrWhiteSpace(nome) || preco < 0 || string.IsNullOrWhiteSpace(disponibilidade))
+            if (string.IsNullOrWhiteSpace(nome) || preco <= 0 || string.IsNullOrWhiteSpace(disponibilidade))
             {
                 return "⚠️ Dados inválidos.";
             }
