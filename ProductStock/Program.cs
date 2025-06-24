@@ -5,7 +5,7 @@ class Program
 {
     static void Main()
     {
-        ProductStock estoque = new ProductStock();
+        ProductStock.ProductStock estoque = new ProductStock.ProductStock();
 
         while (true)
         {
