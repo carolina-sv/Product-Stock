@@ -5,7 +5,7 @@ class Program
 {
     static void Main()
     {
-        ProductStock.ProductStock estoque = new ProductStock.ProductStock();
+        ProductStock estoque = new ProductStock();
 
         while (true)
         {
@@ -16,47 +16,41 @@ class Program
             Console.WriteLine("3. Sair");
             Console.Write("Digite o número da ação: ");
 
-            try
+            string entrada = Console.ReadLine();
+
+            switch (entrada)
             {
-                string entrada = Console.ReadLine();
+                case "1":
+                    Console.Write("👉 Nome do produto: ");
+                    string nome = Console.ReadLine();
 
-                switch (entrada)
-                {
-                    case "1":
-                        Console.Write("👉 Nome do produto: ");
-                        string nome = Console.ReadLine();
+                    Console.Write("💰 Preço do produto (ex: 50.00): ");
+                    string precoStr = Console.ReadLine();
 
-                        Console.Write("💰 Preço do produto (ex: 50.00): ");
-                        string precoStr = Console.ReadLine();
-                        double preco;
-                        if (!double.TryParse(precoStr, out preco))
-                        {
-                            Console.WriteLine("❌ Preço inválido.");
-                            break;
-                        }
-
-                        Console.Write("✅ Produto disponível? (s/n): ");
-                        string disponivel = Console.ReadLine();
-
-                        string resultado = estoque.CadastrarProduto(nome, preco, disponivel);
-                        Console.WriteLine(resultado);
+                    if (!double.TryParse(precoStr, out double preco))
+                    {
+                        Console.WriteLine("❌ Preço inválido. Por favor, digite um número válido.");
                         break;
+                    }
 
-                    case "2":
-                        Console.WriteLine(estoque.ListarProdutos());
-                        break;
+                    Console.Write("✅ Produto disponível? (s/n): ");
+                    string disponivel = Console.ReadLine();
 
-                    case "3":
-                        Console.WriteLine("👋 Programa encerrado. Até mais!");
-                        return;
+                    string resultado = estoque.CadastrarProduto(nome, preco, disponivel);
+                    Console.WriteLine(resultado);
+                    break;
 
-                    default:
-                        throw new Exception("⚠️ Opção inválida. Escolha 1, 2 ou 3.");
-                }
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine(ex.Message);
+                case "2":
+                    Console.WriteLine(estoque.ListarProdutos());
+                    break;
+
+                case "3":
+                    Console.WriteLine("👋 Programa encerrado. Até mais!");
+                    return;
+
+                default:
+                    Console.WriteLine("⚠️ Opção inválida. Selecione uma das tres opções");
+                    break;
             }
         }
     }
