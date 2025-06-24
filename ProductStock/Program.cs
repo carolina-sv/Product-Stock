@@ -9,7 +9,7 @@ class Program
 
         while (true)
         {
-            Console.WriteLine("\n📦 Bem-vindo ao Sistema de Estoque!");
+            Console.WriteLine("📦 Bem-vindo ao Sistema de Estoque!");
             Console.WriteLine("Escolha uma ação:");
             Console.WriteLine("1. Cadastrar produto");
             Console.WriteLine("2. Listar produtos");
